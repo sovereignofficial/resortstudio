@@ -1,0 +1,99 @@
+﻿<Page x:Class="ResortStudio.BookingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ResortStudio"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BookingsPage" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="PageHeader" Grid.Row="0" Margin="20"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="24">Bookings</TextBlock>
+            <StackPanel Grid.Column="1" x:Name="Filters" Orientation="Horizontal" >
+                <Button x:Name="FilterBtnAll" Click="GetAllBookings" Style="{StaticResource SecondaryButton}" >Show all</Button>
+                <Button x:Name="FilterBtnUnc" Click="GetUnconfirmedBookings" Style="{StaticResource SecondaryButton}">Unconfirmed</Button>
+                <Button x:Name="FilterBtnChin" Click="GetCheckedInBookings" Style="{StaticResource SecondaryButton}" >Checked in</Button>
+                <Button x:Name="FilterBtnChout" Click="GetCheckedOutBookings" Style="{StaticResource SecondaryButton}">Checked out</Button>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="PageContent" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" >
+                <DataGrid Loaded="OnLoaded" x:Name="BookingsTable" Style="{StaticResource MyDataGridStyle}" SelectionChanged="BookingsTable_SelectionChanged" SelectedIndex="0" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Cabin Id" Binding="{Binding CabinId}" />
+                        <DataGridTextColumn Width="*" Header="Guest Id" Binding="{Binding GuestId}" />
+                        <DataGridTextColumn Width="*"  Header="Dates" Binding="{Binding FormattedDates}" />
+                        <DataGridTextColumn Width="*"  Header="Status" Binding="{Binding Status}" />
+                        <DataGridTextColumn  Width="*" Header="Amount" Binding="{Binding Amount}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Margin="10 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="{Binding}" x:Name="tbPageInfo" />
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Click="PreviousBtn" Content="Previous page" Style="{StaticResource SecondaryButton}"/>
+                        <Button Click="NextBtn" Content="Next page" Style="{StaticResource PrimaryButton}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <Grid Grid.Column="1" Background="WhiteSmoke">
+                <StackPanel Margin="10">
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Cabin Image"/>
+                    <Image Width="100" Height="50" Source="{Binding}" x:Name="tbCabinImage" Stretch="Fill"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Guest Name"/>
+                    <TextBlock Text="{Binding}" x:Name="tbGuestName"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Guest Email"/>
+                    <TextBlock Text="{Binding}" x:Name="tbEmail"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Dates"/>
+                    <TextBlock Text="{Binding}" x:Name="tbDates"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Number of nights"/>
+                    <TextBlock Text="{Binding}" x:Name="tbNumNights"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Number of guests"/>
+                    <TextBlock Text="{Binding}" x:Name="tbNumGuests"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Cabin Name"/>
+                    <TextBlock Text="{Binding}" x:Name="tbCabinName"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Cabin price"/>
+                    <TextBlock Text="{Binding}" x:Name="tbCabinPrice"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Breakfast price"/>
+                    <TextBlock Text="{Binding}" x:Name="tbBreakfastPrice"/>
+                    <Label FontWeight="Bold" Margin="0 10 0 0" Content="Total price"/>
+                    <TextBlock Text="{Binding}" x:Name="tbTotalPrice"/>
+                    <Label FontWeight="Bold" Content="Status"/>
+                    <TextBlock Text="{Binding}" x:Name="tbCheckedIn"/>
+                    <Label FontWeight="Bold" Content="Is Paid"/>
+                    <TextBlock Text="{Binding}" x:Name="tbPaid"/>
+                    <CheckBox Margin="0 10 0 0" x:Name="cbBreakfastIncluded" Checked="UpdateBreakfastInfo" Unchecked="UpdateBreakfastInfo">Breakfast included</CheckBox>
+
+
+                    <StackPanel Margin="0 20 0 0"  HorizontalAlignment="Center">
+                        <Button Margin="0 5" Style="{StaticResource PrimaryButton}" Click="CheckInBooking">Check in</Button>
+                        <Button Margin="0 5" Style="{StaticResource PrimaryButton}" Click="CheckOutBooking">Check out</Button>
+                        <Button Margin="0 5" Style="{StaticResource SecondaryButton}" Click="RemoveBooking">Remove booking</Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

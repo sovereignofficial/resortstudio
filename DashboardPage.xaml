@@ -1,0 +1,122 @@
+﻿<Page x:Class="ResortStudio.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ResortStudio" xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+       xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DashboardPage" Background="White" FontFamily="Montserrat">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock FontWeight="Bold" FontSize="24">Dashboard | Last 90  days</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1"  HorizontalAlignment="Center" Width="1200" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Margin="5" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray">
+                <Grid   VerticalAlignment="Center" Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"  Background="Transparent" Height="40" Width="40">
+                        <Border Name="mask" Background="#4287f5" CornerRadius="50"/>
+                        <fa:ImageAwesome Icon="ShoppingBag" Width="15" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="#4287f5" CornerRadius="50"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="7" >
+                        <TextBlock FontSize="10"  FontWeight="Bold">BOOKINGS</TextBlock>
+                        <TextBlock  x:Name="tbBookings" Text="{Binding}"  FontWeight="Bold">12</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Margin="5"   Grid.Column="1"  BorderThickness="1" BorderBrush="LightGray">
+                <Grid VerticalAlignment="Center" Height="50" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"  Background="Transparent" Height="40" Width="40">
+                        <Border Name="mask1" Background="#09d936" CornerRadius="50"/>
+                        <fa:ImageAwesome Icon="Money" Width="15" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="#09d936" CornerRadius="50"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="7" >
+                        <TextBlock FontSize="10"   FontWeight="Bold">SALES</TextBlock>
+                        <TextBlock Text="{Binding}" x:Name="tbSales"  FontWeight="Bold" >$2503460</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Margin="5" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray">
+                <Grid  VerticalAlignment="Center" Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"  Background="Transparent" Height="40" Width="40">
+                        <Border Name="mask2" Background="#4b09d9" CornerRadius="50"/>
+                        <fa:ImageAwesome Icon="Calendar" Width="15" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="#4b09d9" CornerRadius="50"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="7" >
+                        <TextBlock FontSize="10"   FontWeight="Bold">CHECKINS</TextBlock>
+                        <TextBlock Text="{Binding}" x:Name="tbCheckIn"  FontWeight="Bold" >115</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Margin="5"  Grid.Column="3" BorderThickness="1" BorderBrush="LightGray">
+
+                <Grid VerticalAlignment="Center" Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"  Background="Transparent" Height="40" Width="40">
+                        <Border Name="mask3" Background="#d98609" CornerRadius="50"/>
+                        <fa:ImageAwesome Icon="BarChart" Width="15" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="#d98609" CornerRadius="50"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="7">
+                        <TextBlock FontSize="10"   FontWeight="Bold">OCCUPANCY</TextBlock>
+                        <TextBlock Text="{Binding}" x:Name="tbOccupancy" FontWeight="Bold">12</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+
+        </Grid>
+
+        <StackPanel Grid.Row="2" Loaded="Grid_Loaded" Margin="20">
+            <TextBlock Text="Sales" FontSize="20" FontWeight="Bold"/>
+            <wpf:CartesianChart x:Name="SalesChart" 
+                Height="300"
+                Width="1000"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                Series="{Binding SeriesCollection}"
+                >
+
+                <wpf:CartesianChart.AxisX>
+                    <wpf:Axis Title="Bookings"
+          LabelFormatter="{Binding LabelFormatter}">
+                    </wpf:Axis>
+                </wpf:CartesianChart.AxisX>
+            </wpf:CartesianChart>
+        </StackPanel>
+    </Grid>
+</Page>

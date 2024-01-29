@@ -1,0 +1,12 @@
+﻿<Window x:Class="ResortStudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResortStudio"
+        mc:Ignorable="d" Loaded="OnLoaded"
+        Title="Resort Studio" MinHeight="750" MinWidth="1650" FontFamily="Montserrat" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <ContentControl x:Name="RSContentArea"/>
+    </DockPanel>
+</Window>
